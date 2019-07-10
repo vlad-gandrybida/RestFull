@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace RestFull.Web.Pages
+namespace RestFull.Presentation.Web.Pages
 {
     public class PrivacyModel : PageModel
     {

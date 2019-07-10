@@ -7,8 +7,14 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App"/>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\RestFull.Business.Extensions\RestFull.Business.Extensions.csproj" />
+    <ProjectReference Include="..\RestFull.Data.Extensions\RestFull.Data.Extensions.csproj" />
   </ItemGroup>
 
 </Project>
