@@ -10,5 +10,9 @@ namespace RestFull.Data.Entities.Restaurant
         public int NumberOfSeats { get; set; }
 
         public TableState State { get; set; }
+
+        public int RestaurantId { get; set; }
+
+        public Restaurant Restaurant { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace RestFull.Data.SQL.Repository
 
         public Restaurant GetById(int id)
         {
-            return Database.Restaurants.FirstOrDefault(restaurant => restaurant.ID == id);
+            return Database.Restaurants.FirstOrDefault(restaurant => restaurant.Id == id);
         }
 
         public Restaurant Add(Restaurant item)
@@ -45,7 +45,7 @@ namespace RestFull.Data.SQL.Repository
 
         public Restaurant Delete(Restaurant item)
         {
-            var entity = Database.Restaurants.FirstOrDefault(r => r.ID == item.ID);
+            var entity = Database.Restaurants.FirstOrDefault(r => r.Id == item.Id);
 
             if (entity != null)
             {

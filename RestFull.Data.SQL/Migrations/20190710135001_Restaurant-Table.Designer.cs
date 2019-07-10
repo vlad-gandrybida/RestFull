@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestFull.Data.SQL;
 
 namespace RestFull.Data.SQL.Migrations
 {
     [DbContext(typeof(RestFullDbContext))]
-    partial class RestFullDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190710135001_Restaurant-Table")]
+    partial class RestaurantTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +23,7 @@ namespace RestFull.Data.SQL.Migrations
 
             modelBuilder.Entity("RestFull.Data.Entities.Restaurant.Restaurant", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -31,43 +33,37 @@ namespace RestFull.Data.SQL.Migrations
 
                     b.Property<int>("State");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("Restaurants");
                 });
 
             modelBuilder.Entity("RestFull.Data.Entities.Restaurant.Table", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("NumberOfSeats");
 
-                    b.Property<int>("RestaurantId");
+                    b.Property<int?>("RestaurantID");
 
                     b.Property<int>("State");
 
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
-                    b.HasIndex("RestaurantId");
+                    b.HasIndex("RestaurantID");
 
                     b.ToTable("Tables");
                 });
 
             modelBuilder.Entity("RestFull.Data.Entities.User.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
-
-                    b.Property<DateTime>("RegistrationDate");
-
-                    b.Property<string>("Surname");
-
-                    b.HasKey("Id");
+                    b.HasKey("ID");
 
                     b.ToTable("Users");
                 });
@@ -76,8 +72,7 @@ namespace RestFull.Data.SQL.Migrations
                 {
                     b.HasOne("RestFull.Data.Entities.Restaurant.Restaurant", "Restaurant")
                         .WithMany("Tables")
-                        .HasForeignKey("RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("RestaurantID");
                 });
 #pragma warning restore 612, 618
         }

@@ -23,7 +23,7 @@ namespace RestFull.Data.SQL.Repository
 
         public User GetById(int id)
         {
-            return Database.Users.FirstOrDefault(u => u.ID == id);
+            return Database.Users.FirstOrDefault(u => u.Id == id);
         }
 
         public User Add(User item)

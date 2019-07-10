@@ -23,7 +23,7 @@ namespace RestFull.Data.SQL.Repository
 
         public Table GetById(int id)
         {
-            return Database.Tables.FirstOrDefault(t => t.ID == id);
+            return Database.Tables.FirstOrDefault(t => t.Id == id);
         }
 
         public Table Add(Table item)
