@@ -13,8 +13,8 @@
 
 
   <ItemGroup>
-    <ProjectReference Include="..\RestFull.Business.Extensions\RestFull.Business.Extensions.csproj" />
-    <ProjectReference Include="..\RestFull.Data.Extensions\RestFull.Data.Extensions.csproj" />
+    <ProjectReference Include="..\..\..\Business\Extensions\code\RestFull.Business.Extensions.csproj" />
+    <ProjectReference Include="..\..\..\Data\Extensions\code\RestFull.Data.Extensions.csproj" />
   </ItemGroup>
 
 </Project>

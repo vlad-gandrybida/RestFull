@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\code\RestFull.Data.Interfaces.csproj" />
+    <ProjectReference Include="..\..\SQL\code\RestFull.Data.SQL.csproj" />
+  </ItemGroup>
+
+</Project>
