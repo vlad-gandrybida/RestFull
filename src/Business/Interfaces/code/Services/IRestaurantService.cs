@@ -8,5 +8,7 @@ namespace RestFull.Business.Interfaces.Services
     public interface IRestaurantService
     {
         Restaurant AddNewRestaurant(Restaurant restaurant);
+
+        IEnumerable<Restaurant> GetRestaurants();
     }
 }

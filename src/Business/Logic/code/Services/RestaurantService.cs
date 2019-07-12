@@ -18,7 +18,7 @@ namespace RestFull.Business.Logic.Services
             TableRepository = tableRepository;
         }
 
-        public IEnumerable<Restaurant> GetAllRestaurants()
+        public IEnumerable<Restaurant> GetRestaurants()
         {
             return RestaurantRepository.GetAll();
         }

@@ -4,18 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RestFull.Business.Interfaces.Services;
-using RestFull.Data.Entities.Restaurant;
 
-namespace RestFull.Presentation.Web.Pages
+namespace RestFull.Presentation.Web.Pages.Admin
 {
     public class IndexModel : PageModel
     {
-        public IndexModel()
-        {
-
-        }
-
         public void OnGet()
         {
 

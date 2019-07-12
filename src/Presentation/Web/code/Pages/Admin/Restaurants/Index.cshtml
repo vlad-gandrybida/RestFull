@@ -1,0 +1,60 @@
+﻿@page
+@model RestFull.Presentation.Web.Pages.Admin.Restaurants.IndexModel
+@{
+    ViewData["Title"] = "Admin Restaurants";
+}
+
+<h1 class="text-center mb-3">Administrate Restaurants</h1>
+
+<table class="table table-light table-bordered rounded table-striped">
+    <thead class="thead-light">
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>State</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td class="align-middle">restaurant.Name</td>
+            <td class="align-middle">restaurant.Location</td>
+            <td class="align-middle">restaurant.State</td>
+            <td class="align-middle">
+                <div class="btn-group w-100" role="group">
+                    <a class="btn btn-primary btn-sm w-50" asp-page="/Admin/Restaurants/Edit">Edit</a>
+                    <a class="btn btn-danger btn-sm w-50" asp-page="/Admin/Restaurants/Delete">Delete</a>
+                </div>
+            </td>
+        </tr>
+    <tr>
+        <td>1</td>
+        <td>restaurant.Name</td>
+        <td>restaurant.Location</td>
+        <td>restaurant.State</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>restaurant.Name</td>
+        <td>restaurant.Location</td>
+        <td>restaurant.State</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>restaurant.Name</td>
+        <td>restaurant.Location</td>
+        <td>restaurant.State</td>
+    </tr>
+        @foreach (var restaurant in Model.Restaurants)
+    {
+        <tr>
+            <td>1</td>
+            <td>restaurant.Name</td>
+            <td>restaurant.Location</td>
+            <td>restaurant.State</td>
+        </tr>
+    }
+    </tbody>
+</table>
