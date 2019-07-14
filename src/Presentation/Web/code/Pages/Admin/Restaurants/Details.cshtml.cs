@@ -10,16 +10,15 @@ using RestFull.Data.SQL;
 
 namespace RestFull.Presentation.Web.Pages.Admin.Restaurants
 {
-    public class DeleteModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly RestFull.Data.SQL.RestFullDbContext _context;
 
-        public DeleteModel(RestFull.Data.SQL.RestFullDbContext context)
+        public DetailsModel(RestFull.Data.SQL.RestFullDbContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
         public Restaurant Restaurant { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -36,24 +35,6 @@ namespace RestFull.Presentation.Web.Pages.Admin.Restaurants
                 return NotFound();
             }
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Restaurant = await _context.Restaurants.FindAsync(id);
-
-            if (Restaurant != null)
-            {
-                _context.Restaurants.Remove(Restaurant);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
         }
     }
 }

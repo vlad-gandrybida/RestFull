@@ -4,24 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RestFull.Business.Interfaces.Services;
+using Microsoft.EntityFrameworkCore;
 using RestFull.Data.Entities.Restaurant;
+using RestFull.Data.SQL;
 
 namespace RestFull.Presentation.Web.Pages.Admin.Restaurants
 {
     public class IndexModel : PageModel
     {
-        private IRestaurantService RestaurantService { get; }
-        public IEnumerable<Restaurant> Restaurants { get; private set; }
+        private readonly RestFull.Data.SQL.RestFullDbContext _context;
 
-        public IndexModel(IRestaurantService restaurantService)
+        public IndexModel(RestFull.Data.SQL.RestFullDbContext context)
         {
-            RestaurantService = restaurantService;
+            _context = context;
         }
 
-        public void OnGet()
+        public IList<Restaurant> Restaurant { get;set; }
+
+        public async Task OnGetAsync()
         {
-            Restaurants = RestaurantService.GetRestaurants();
+            Restaurant = await _context.Restaurants.ToListAsync();
         }
     }
 }
