@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using RestFull.Data.Entities.Restaurant;
 
 namespace RestFull.Business.Interfaces.Services
 {
     public interface IRestaurantService
     {
-        Restaurant AddNewRestaurant(Restaurant restaurant);
+        Task<Restaurant> AddNewRestaurant(Restaurant restaurant);
 
-        IEnumerable<Restaurant> GetRestaurants();
+        Task<IEnumerable<Restaurant>> GetRestaurants();
+
+        Task<Restaurant> GetRestaurantById(int id);
     }
 }

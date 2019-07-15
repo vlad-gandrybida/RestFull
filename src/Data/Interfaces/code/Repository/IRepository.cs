@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace RestFull.Data.Interfaces.Repository
 {
     public interface IRepository<T>
     {
-        IEnumerable<T> GetAll();
-        T GetById(int id);
-        T Add(T item);
-        T Update(T item);
-        T Delete(T item);
-        int Commit();
+        Task<IEnumerable<T>> GetAll();
+        Task<T> GetById(int id);
+        Task<T> Add(T item);
+        Task<T> Update(T item);
+        Task<T> Delete(T item);
+        Task<int> Commit();
     }
 }

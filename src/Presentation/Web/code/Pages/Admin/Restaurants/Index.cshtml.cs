@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using RestFull.Business.Interfaces.Services;
 using RestFull.Data.Entities.Restaurant;
 using RestFull.Data.SQL;
 
@@ -12,18 +13,18 @@ namespace RestFull.Presentation.Web.Pages.Admin.Restaurants
 {
     public class IndexModel : PageModel
     {
-        private readonly RestFull.Data.SQL.RestFullDbContext _context;
+        private readonly IRestaurantService _restaurantService;
 
-        public IndexModel(RestFull.Data.SQL.RestFullDbContext context)
+        public IndexModel(IRestaurantService restaurantService)
         {
-            _context = context;
+            _restaurantService = restaurantService;
         }
 
-        public IList<Restaurant> Restaurant { get;set; }
+        public IEnumerable<Restaurant> Restaurant { get;set; }
 
         public async Task OnGetAsync()
         {
-            Restaurant = await _context.Restaurants.ToListAsync();
+            Restaurant = await _restaurantService.GetRestaurants();
         }
     }
 }

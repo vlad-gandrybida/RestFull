@@ -42,9 +42,11 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    min-height: 75rem;
+    padding-top: 4.5rem;
+    margin-bottom: 60px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;

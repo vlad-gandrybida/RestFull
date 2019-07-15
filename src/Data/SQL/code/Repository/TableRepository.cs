@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Extensions.Internal;
 using RestFull.Data.Entities.Restaurant;
 using RestFull.Data.Interfaces.Repository;
 
@@ -16,32 +19,32 @@ namespace RestFull.Data.SQL.Repository
             Database = database;
         }
 
-        public IEnumerable<Table> GetAll()
+        public async Task<IEnumerable<Table>> GetAll()
         {
             return Database.Tables.AsEnumerable();
         }
 
-        public Table GetById(int id)
+        public async Task<Table> GetById(int id)
         {
-            return Database.Tables.FirstOrDefault(t => t.Id == id);
+            return await Database.Tables.FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        public Table Add(Table item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Table Update(Table item)
+        public async Task<Table> Add(Table item)
         {
             throw new NotImplementedException();
         }
 
-        public Table Delete(Table item)
+        public async Task<Table> Update(Table item)
         {
             throw new NotImplementedException();
         }
 
-        public int Commit()
+        public async Task<Table> Delete(Table item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<int> Commit()
         {
             throw new NotImplementedException();
         }

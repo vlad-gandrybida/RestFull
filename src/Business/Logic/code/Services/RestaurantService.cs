@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using RestFull.Business.Interfaces.Services;
 using RestFull.Data.Entities.Restaurant;
 using RestFull.Data.Interfaces.Repository;
@@ -18,15 +19,20 @@ namespace RestFull.Business.Logic.Services
             TableRepository = tableRepository;
         }
 
-        public IEnumerable<Restaurant> GetRestaurants()
+        public async Task<IEnumerable<Restaurant>> GetRestaurants()
         {
-            return RestaurantRepository.GetAll();
+            return await RestaurantRepository.GetAll();
         }
 
-        public Restaurant AddNewRestaurant(Restaurant restaurant)
+        public Task<Restaurant> GetRestaurantById(int id)
         {
-            var entity = RestaurantRepository.Add(restaurant);
-            RestaurantRepository.Commit();
+            return RestaurantRepository.GetById(id);
+        }
+
+        public async Task<Restaurant> AddNewRestaurant(Restaurant restaurant)
+        {
+            var entity = await RestaurantRepository.Add(restaurant);
+            await RestaurantRepository.Commit();
             return entity;
         }
     }

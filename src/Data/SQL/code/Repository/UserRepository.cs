@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using RestFull.Data.Entities.User;
 using RestFull.Data.Interfaces.Repository;
 
@@ -16,32 +18,32 @@ namespace RestFull.Data.SQL.Repository
             Database = database;
         }
 
-        public IEnumerable<User> GetAll()
+        public async Task<IEnumerable<User>> GetAll()
         {
             return Database.Users.AsEnumerable();
         }
 
-        public User GetById(int id)
+        public async Task<User> GetById(int id)
         {
-            return Database.Users.FirstOrDefault(u => u.Id == id);
+            return await Database.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public User Add(User item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User Update(User item)
+        public async Task<User> Add(User item)
         {
             throw new NotImplementedException();
         }
 
-        public User Delete(User item)
+        public async Task<User> Update(User item)
         {
             throw new NotImplementedException();
         }
 
-        public int Commit()
+        public async Task<User> Delete(User item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<int> Commit()
         {
             throw new NotImplementedException();
         }

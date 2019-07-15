@@ -14,6 +14,7 @@ namespace RestFull.Data.Entities.Restaurant
         public string Location { get; set; }
         
         public List<Table> Tables { get; set; }
+        public string Description { get; set; }
 
         public Restaurant()
         {

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using RestFull.Data.Entities.Restaurant;
 using RestFull.Data.Interfaces.Repository;
 
@@ -17,24 +19,24 @@ namespace RestFull.Data.SQL.Repository
             Database = db;
         }
 
-        public IEnumerable<Restaurant> GetAll()
+        public async Task<IEnumerable<Restaurant>> GetAll()
         {
             return Database.Restaurants.AsEnumerable();
         }
 
-        public Restaurant GetById(int id)
+        public async Task<Restaurant> GetById(int id)
         {
-            return Database.Restaurants.FirstOrDefault(restaurant => restaurant.Id == id);
+            return await Database.Restaurants.FirstOrDefaultAsync(restaurant => restaurant.Id == id);
         }
 
-        public Restaurant Add(Restaurant item)
+        public async Task<Restaurant> Add(Restaurant item)
         {
-            var entity = Database.Restaurants.Add(item);
+            var entity = await Database.Restaurants.AddAsync(item);
 
             return entity.Entity;
         }
 
-        public Restaurant Update(Restaurant item)
+        public async  Task<Restaurant> Update(Restaurant item)
         {
             var entity = Database.Restaurants.Attach(item);
 
@@ -43,9 +45,9 @@ namespace RestFull.Data.SQL.Repository
             return item;
         }
 
-        public Restaurant Delete(Restaurant item)
+        public async Task<Restaurant> Delete(Restaurant item)
         {
-            var entity = Database.Restaurants.FirstOrDefault(r => r.Id == item.Id);
+            var entity = await Database.Restaurants.FirstOrDefaultAsync(r => r.Id == item.Id);
 
             if (entity != null)
             {
@@ -55,7 +57,7 @@ namespace RestFull.Data.SQL.Repository
             return entity;
         }
 
-        public int Commit()
+        public async Task<int> Commit()
         {
             return Database.SaveChanges();
         }
