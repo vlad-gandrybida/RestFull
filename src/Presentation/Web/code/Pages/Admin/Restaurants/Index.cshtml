@@ -15,16 +15,48 @@
     </div>
 </div>
 
-<div class="list-group">
-        @foreach (var item in Model.Restaurant)
-        {
-            <a asp-page="./Details" asp-route-id="@item.Id" class="list-group-item list-group-item-action">
-                <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">@item.Name</h5>
-                    <small>@Html.RestaurantStateBadge(item.State)</small>
-                </div>
-                <p class="mb-1">@item.Description</p>
-                <small>@item.Location</small>
-            </a>
-        }
+<div class="list-group" id="scrolList">
+    @Html.Partial("_RestaurantListItems", Model.Restaurant)
+</div>
+
+    <div class="d-flex justify-content-center mt-2">
+        <div id="loading" class="spinner-border text-primary text-center" role="status">
+            <span class="sr-only">Loading</span>
+        </div>
     </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            $('div#loading').hide();
+            var page = 1;
+            var _inCallback = false;
+            function loadItems() {
+                if (page > -1 && !_inCallback) {
+                    _inCallback = true;
+                    page++;
+                    $('div#loading').show();
+                    $.ajax({
+                        type: 'GET',
+                        url: '/api/getall',
+                        success: function (data, textstatus) {
+                            if (data != '') {
+                                $("#scrolList").append(data);
+                            }
+                            else {
+                                page = -1;
+                            }
+                            _inCallback = false;
+                            $("div#loading").hide();
+                        }
+                    });
+                }
+            }
+            $(window).scroll(function () {
+                if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                    loadItems();
+                }
+            });
+        })
+    </script>
+}

@@ -1,0 +1,15 @@
+﻿@using RestFull.Presentation.Web.Helpers
+@model IEnumerable<RestFull.Data.Entities.Restaurant.Restaurant>
+
+
+@foreach (var item in Model)
+{
+    <a href="/Admin/Restaurants/Details?id=@item.Id" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">@item.Name</h5>
+            <small>@Html.RestaurantStateBadge(item.State)</small>
+        </div>
+        <p class="mb-1">@item.Description</p>
+        <small>@item.Location</small>
+    </a>
+}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Http;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,7 +25,9 @@ namespace RestFull.Presentation.Web.Pages.Admin.Restaurants
 
         public async Task OnGetAsync()
         {
+
             Restaurant = await _restaurantService.GetRestaurants();
+
         }
     }
 }

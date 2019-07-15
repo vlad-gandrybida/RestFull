@@ -5,33 +5,30 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Restaurant</h4>
+<h4 class="text-center">Crate new restaurant</h4>
 <hr />
 <div class="row">
-    <div class="offset-lg-1 col-lg-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Restaurant.Name" class="control-label"></label>
-                <input asp-for="Restaurant.Name" class="form-control" />
-                <span asp-validation-for="Restaurant.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Restaurant.Location" class="control-label"></label>
-                <input asp-for="Restaurant.Location" class="form-control" />
-                <span asp-validation-for="Restaurant.Location" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="offset-md-3 col-md-6">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Restaurant.Name" class="control-label"></label>
+            <input asp-for="Restaurant.Name" class="form-control" />
+            <span asp-validation-for="Restaurant.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Restaurant.Location" class="control-label"></label>
+            <input asp-for="Restaurant.Location" class="form-control" />
+            <span asp-validation-for="Restaurant.Location" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary w-100" />
+        </div>
+    </form>
+    <div class="text-center">
+        <a asp-page="./Index">Back to List</a>
     </div>
 </div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {
