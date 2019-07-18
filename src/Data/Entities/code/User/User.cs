@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace RestFull.Data.Entities.User
 {
@@ -10,6 +12,14 @@ namespace RestFull.Data.Entities.User
 
         public string Surname { get; set; }
 
+        public DateTime DateOfBirth { get; set; }
+
         public DateTime RegistrationDate { get; set; }
+
+        public string PhotoUrl { get; set; }
+
+        public string IdentityUserId { get; set; }
+
+        public IdentityUser IdentityUser { get; set; }
     }
 }

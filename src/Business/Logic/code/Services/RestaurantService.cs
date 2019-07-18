@@ -24,7 +24,7 @@ namespace RestFull.Business.Logic.Services
             return await RestaurantRepository.GetAll();
         }
 
-        public Task<Restaurant> GetRestaurantById(int id)
+        public Task<Restaurant> GetRestaurantById(string id)
         {
             return RestaurantRepository.GetById(id);
         }

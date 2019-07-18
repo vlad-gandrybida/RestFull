@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using RestFull.Common.Enums;
+using RestFull.Common.Enums.Restaurant;
 
 namespace RestFull.Presentation.Web.Helpers
 {

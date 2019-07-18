@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
 
@@ -20,7 +21,8 @@
 
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\Users\" />
+    <Folder Include="Areas\Admin\Pages\Users\" />
+    <Folder Include="Pages\Admin\" />
   </ItemGroup>
 
 </Project>

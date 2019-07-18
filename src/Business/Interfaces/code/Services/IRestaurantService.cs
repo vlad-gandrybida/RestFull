@@ -12,6 +12,6 @@ namespace RestFull.Business.Interfaces.Services
 
         Task<IEnumerable<Restaurant>> GetRestaurants();
 
-        Task<Restaurant> GetRestaurantById(int id);
+        Task<Restaurant> GetRestaurantById(string id);
     }
 }

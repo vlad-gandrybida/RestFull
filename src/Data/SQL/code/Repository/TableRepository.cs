@@ -24,7 +24,7 @@ namespace RestFull.Data.SQL.Repository
             return Database.Tables.AsEnumerable();
         }
 
-        public async Task<Table> GetById(int id)
+        public async Task<Table> GetById(string id)
         {
             return await Database.Tables.FirstOrDefaultAsync(t => t.Id == id);
         }

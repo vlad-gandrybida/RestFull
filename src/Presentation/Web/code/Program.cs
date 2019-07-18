@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using RestFull.Data.Extensions;
+using RestFull.Data.SQL;
+using RestFull.Data.SQL.Repository;
 
 namespace RestFull.Presentation.Web
 {
@@ -14,7 +18,11 @@ namespace RestFull.Presentation.Web
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var host = CreateWebHostBuilder(args).Build();
+
+            host.AddInitialData().Wait();
+
+            host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

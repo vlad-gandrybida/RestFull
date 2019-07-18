@@ -40,6 +40,10 @@ namespace RestFull.Presentation.Web
 
             services.AddRestFullServices();
 
+            services.AddRestFullIdentity();
+
+            services.AddEmailSender(Configuration);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -59,6 +63,7 @@ namespace RestFull.Presentation.Web
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseCookiePolicy();
 
             app.UseMvc();
