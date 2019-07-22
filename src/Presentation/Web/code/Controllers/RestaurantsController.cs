@@ -20,7 +20,7 @@ namespace RestFull.Presentation.Web.Controllers
         public async Task<IActionResult> GetRests()
         {
             var rest = await _restaurantService.GetRestaurants();
-            return PartialView("Pages/Admin/Restaurants/_RestaurantListItems.cshtml",rest);
+            return PartialView("Areas/Admin/Pages/Restaurants/_RestaurantListItems.cshtml",rest);
         }
     }
 }
