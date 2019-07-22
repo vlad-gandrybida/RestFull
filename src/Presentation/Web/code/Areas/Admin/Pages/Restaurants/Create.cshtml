@@ -11,19 +11,22 @@
     <div class="offset-md-3 col-md-6">
     <form method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
+        
+        <!-- Email -->
+        <div class="md-form">
             <label asp-for="Restaurant.Name" class="control-label"></label>
             <input asp-for="Restaurant.Name" class="form-control" />
             <span asp-validation-for="Restaurant.Name" class="text-danger"></span>
         </div>
-        <div class="form-group">
+
+        <!-- Password -->
+        <div class="md-form">
             <label asp-for="Restaurant.Address" class="control-label"></label>
             <input asp-for="Restaurant.Address" class="form-control" />
             <span asp-validation-for="Restaurant.Address" class="text-danger"></span>
         </div>
-        <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary w-100" />
-        </div>
+        
+        <button type="submit" class="btn aqua-gradient btn-block my-4">Save</button>
     </form>
     <div class="text-center">
         <a asp-page="./Index">Back to List</a>
