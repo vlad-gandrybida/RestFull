@@ -1,4 +1,5 @@
 "use strict";
+'use scrict';
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -7,14 +8,16 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 (function ($) {
-  $(document).on('click', '.chip .close', function () {
-    var $this = $(this);
+  $(document).ready(function () {
+    $(document).on('click', '.chip .close', function () {
+      var $this = $(this);
 
-    if ($this.closest('.chips').data('initialized')) {
-      return;
-    }
+      if ($this.closest('.chips').data('initialized')) {
+        return;
+      }
 
-    $this.closest('.chip').remove();
+      $this.closest('.chip').remove();
+    });
   });
 
   var MaterialChip =
@@ -27,7 +30,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       this.$document = $(document);
       this.options = options;
       this.eventsHandled = false;
-      this.ulWrapper = $('<ul class="chip-ul z-depth-1" tabindex="0"></ul>');
+      this.ulWrapper = $('<ul class="chip-ul z-depth-1"></ul>');
       this.defaultOptions = {
         data: [],
         dataChip: [],
@@ -75,7 +78,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           $this.data('chips', options.data);
           $this.data('index', index);
           $this.data('initialized', true);
-          $this.attr('tabindex', 0);
 
           if (!$this.hasClass(_this.selectors.chips)) {
             $this.addClass('chips');
@@ -130,7 +132,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var _this2 = this;
 
         this.$document.on('click', this.selectors.chips, function (e) {
-          return $(e.target).find(_this2.selectors.input).focus().addClass('active');
+          return $(e.target).find(_this2.selectors.input).focus();
         });
       }
     }, {
@@ -138,20 +140,17 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       value: function handleBlurInput() {
         var _this3 = this;
 
-        this.$document.on('blur', this.selectors.chips, function (e) {
-          setTimeout(function () {
-            return _this3.ulWrapper.removeClass('active').hide();
+        this.$document.on('blur', this.selectors.chips, function () {
+          return setTimeout(function () {
+            return _this3.ulWrapper.hide();
           }, 100);
-          $(e.target).removeClass('active');
-          $('.chip.selected').removeClass('selected');
         });
       }
     }, {
       key: "handleSelectorChip",
       value: function handleSelectorChip() {
-        this.chips.on('click', '.chip', function () {
-          $('.chip.selected').not(this).removeClass('selected');
-          $(this).toggleClass('selected');
+        this.chips.on('click', '.chip', function (e) {
+          return $(e.target).removeClass('selected').addClass('selected');
         });
       }
     }, {
@@ -159,7 +158,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       value: function handleDocumentKeyDown() {
         var _this4 = this;
 
-        this.chips.on('keydown', function (e) {
+        this.$document.on('keydown', function (e) {
+          if ($(e.target).is('input, textarea')) {
+            return;
+          }
+
           var $selectedChip = _this4.$document.find(_this4.selectors.chip + _this4.selectors.selectedChip);
 
           var $chipsWrapper = $selectedChip.closest(_this4.selectors.chips);
@@ -200,10 +203,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
 
         $chipsInput.on('click', function (e) {
-          var $target = $(e.target);
-          $target.closest(_this5.selectors.chips).addClass('focus');
+          $(e.target).closest(_this5.selectors.chips).addClass('focus');
           $(_this5.selectors.chip).removeClass('selected');
-          $target.addClass('active');
         });
       }
     }, {
@@ -211,7 +212,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       value: function handleDocumentFocusOut() {
         var _this6 = this;
 
-        this.chips.on('focusout', 'input', function (e) {
+        this.$document.on('focusout', "".concat(this.selectors.chips, " ").concat(this.selectors.input), function (e) {
           return $(e.target).closest(_this6.selectors.chips).removeClass('focus');
         });
       }
@@ -220,18 +221,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       value: function handleDocumentKeyDownChipsInput() {
         var _this7 = this;
 
-        this.chips.on('keydown', 'input', function (e) {
+        this.$document.on('keydown', "".concat(this.selectors.chips, " ").concat(this.selectors.input), function (e) {
           var $target = $(e.target);
-          var $chips = _this7.chips;
           var $chipsWrapper = $target.closest(_this7.selectors.chips);
           var chipsIndex = $chipsWrapper.data('index');
           var chipsLength = $chipsWrapper.children(_this7.selectors.chip).length;
           var enterPressed = e.which === _this7.keyCodes.enter;
           var commaPressed = e.which === _this7.keyCodes.comma;
-          var leftArrowPressed = e.which === _this7.keyCodes.arrowLeft;
-          var backspacePressed = e.which === _this7.keyCodes.backspace;
 
-          if ((enterPressed || commaPressed) && !_this7.ulWrapper.find('li').hasClass('selected')) {
+          if (enterPressed || commaPressed) {
             e.preventDefault();
 
             _this7.addChip(chipsIndex, {
@@ -247,25 +245,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           if (leftArrowOrDeletePressed && isValueEmpty && chipsLength) {
             _this7.selectChip(chipsIndex, chipsLength - 1, $chipsWrapper);
-          }
 
-          if (isValueEmpty && $(_this7.selectors.input).hasClass('active')) {
-            if (leftArrowPressed) {
-              _this7.selectChip(chipsIndex, chipsLength - 1, $chipsWrapper);
-            }
-          } else {
-            $chips.find('.chip').removeClass('selected');
-          }
-
-          var $thisChips = $chips.find('.chip-position-wrapper').children('.chip');
-          var $thisChipsLast = $chips.find('.chip-position-wrapper .chip').last().index();
-
-          if (isValueEmpty && backspacePressed && (!$thisChips.hasClass('selected') || !$chips.find('.chip').hasClass('selected')) && $chips.hasClass('chips') && !$chips.hasClass('chips-initial') && !$chips.hasClass('chips-placeholder')) {
-            _this7.deleteChip($chipsWrapper.data('index'), $thisChipsLast, $chipsWrapper);
-          }
-
-          if (isValueEmpty && backspacePressed && !$chips.find('.chip').hasClass('selected') && $chips.hasClass('chips') && ($chips.hasClass('chips-initial') || $chips.hasClass('chips-placeholder'))) {
-            _this7.deleteChip($chipsWrapper.data('index'), $thisChipsLast, $chipsWrapper);
+            $target.blur();
           }
         });
       }
@@ -299,8 +280,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         var $ulWrapper = this.ulWrapper;
         var dataChip = this.options.dataChip;
-        var $thisChips = this.chips;
-        var $input = $thisChips.children('.chip-position-wrapper').children('input');
+        var $thisChups = this.chips;
+        var $input = $thisChups.children('.chip-position-wrapper').children('input');
         $input.on('keyup', function (e) {
           var $inputValue = $input.val();
           $ulWrapper.empty();
@@ -308,17 +289,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           if ($inputValue.length) {
             for (var item in dataChip) {
               if (dataChip[item].toLowerCase().includes($inputValue.toLowerCase())) {
-                $thisChips.children('.chip-position-wrapper').append($ulWrapper.append($("<li>".concat(dataChip[item], "</li>"))));
+                $thisChups.children('.chip-position-wrapper').append($ulWrapper.append($("<li>".concat(dataChip[item], "</li>"))));
               }
             }
           }
 
           if (e.which === _this9.keyCodes.enter) {
             $ulWrapper.empty();
+            $thisChups.children(':first').trigger('click');
             $ulWrapper.remove();
-          }
+          } // eslint-disable-next-line no-unused-expressions
 
-          $inputValue.length === 0 ? $ulWrapper.removeClass('active').hide() : $ulWrapper.addClass('active').show();
+
+          $inputValue.length === 0 ? $ulWrapper.hide() : $ulWrapper.show();
         });
       }
     }, {

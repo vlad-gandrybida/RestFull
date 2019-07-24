@@ -7,19 +7,15 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 (function ($) {
-  var inputData = {};
-  var dataColor = '';
-  var buttonCloseColor = '';
-  var buttonCloseBlurColor = '#ced4da';
-  var inputFocus = '1px solid #4285f4';
-  var inputBlur = '1px solid #ced4da';
-  var inputFocusShadow = '0 1px 0 0 #4285f4';
-  var inputBlurShadow = '';
-  var enterCharCode = 13;
-  var arrowUpCharCode = 38;
-  var arrowDownCharCode = 40;
-  var count = -1;
-  var nextScrollHeight = -45;
+  var INPUT_DATA = {};
+  var DATA_COLOR = '';
+  var BUTTON_X_COLOR = '';
+  var BUTTON_X_BLUR_COLOR = '#ced4da';
+  var INPUT_FOCUS = '1px solid #4285f4';
+  var INPUT_BLUR = '1px solid #ced4da';
+  var INPUT_FOCUS_SHADOW = '0 1px 0 0 #4285f4';
+  var INPUT_BLUR_SHADOW = '';
+  var ENTER_CHAR_CODE = 13;
 
   var mdbAutocomplete =
   /*#__PURE__*/
@@ -28,14 +24,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _classCallCheck(this, mdbAutocomplete);
 
       this.defaults = {
-        data: inputData,
-        dataColor: dataColor,
-        closeColor: buttonCloseColor,
-        closeBlurColor: buttonCloseBlurColor,
-        inputFocus: inputFocus,
-        inputBlur: inputBlur,
-        inputFocusShadow: inputFocusShadow,
-        inputBlurShadow: inputBlurShadow
+        data: INPUT_DATA,
+        dataColor: DATA_COLOR,
+        xColor: BUTTON_X_COLOR,
+        xBlurColor: BUTTON_X_BLUR_COLOR,
+        inputFocus: INPUT_FOCUS,
+        inputBlur: INPUT_BLUR,
+        inputFocusShadow: INPUT_FOCUS_SHADOW,
+        inputBlurShadow: INPUT_BLUR_SHADOW
       };
       this.$input = input;
       this.options = this.assignOptions(options);
@@ -56,8 +52,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }
     }, {
       key: "assignOptions",
-      value: function assignOptions(options) {
-        return $.extend({}, this.defaults, options);
+      value: function assignOptions(newOptions) {
+        return $.extend({}, this.defaults, newOptions);
       }
     }, {
       key: "setData",
@@ -94,22 +90,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var _this3 = this;
 
         this.$input.on('keyup', function (e) {
-          if (e.which === enterCharCode) {
-            if (!_this3.options.data.includes(_this3.$input.val())) {
-              _this3.options.data.push(_this3.$input.val());
-            }
-
-            _this3.$autocompleteWrap.find('.selected').trigger('click');
-
-            _this3.$autocompleteWrap.empty();
-
-            _this3.inputBlur();
-
-            count = -1;
-            nextScrollHeight = -45;
-            return count;
-          }
-
           var $inputValue = _this3.$input.val();
 
           _this3.$autocompleteWrap.empty();
@@ -122,51 +102,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 _this3.$autocompleteWrap.append(option);
               }
             }
-
-            var $ulList = _this3.$autocompleteWrap;
-
-            var $ulItems = _this3.$autocompleteWrap.find('li');
-
-            var nextItemHeight = $ulItems.eq(count).outerHeight();
-            var previousItemHeight = $ulItems.eq(count - 1).outerHeight();
-
-            if (e.which === arrowDownCharCode) {
-              if (count > $ulItems.length - 2) {
-                count = -1;
-                $ulItems.scrollTop(0);
-                nextScrollHeight = -45;
-                return;
-              } else {
-                count++;
-              }
-
-              nextScrollHeight += nextItemHeight;
-              $ulList.scrollTop(nextScrollHeight);
-              $ulItems.eq(count).addClass('selected');
-            } else if (e.which === arrowUpCharCode) {
-              if (count < 1) {
-                count = $ulItems.length;
-                $ulList.scrollTop($ulList.prop('scrollHeight'));
-                nextScrollHeight = $ulList.prop('scrollHeight') - nextItemHeight;
-              } else {
-                count--;
-              }
-
-              nextScrollHeight -= previousItemHeight;
-              $ulList.scrollTop(nextScrollHeight);
-              $ulItems.eq(count).addClass('selected');
-            }
-
-            if ($inputValue.length === 0) {
-              _this3.$clearButton.css('visibility', 'hidden');
-            } else {
-              _this3.$clearButton.css('visibility', 'visible');
-            }
-
-            _this3.$autocompleteWrap.children().css('color', _this3.options.dataColor);
-          } else {
-            _this3.$clearButton.css('visibility', 'hidden');
           }
+
+          if (e.which === ENTER_CHAR_CODE) {
+            _this3.$autocompleteWrap.children(':first').trigger('click');
+
+            _this3.$autocompleteWrap.empty();
+          }
+
+          if ($inputValue.length === 0) {
+            _this3.$input.parent().find('.mdb-autocomplete-clear').css('visibility', 'hidden');
+          } else {
+            _this3.$input.parent().find('.mdb-autocomplete-clear').css('visibility', 'visible');
+          }
+
+          _this3.$autocompleteWrap.children().css('color', _this3.options.dataColor);
         });
       }
     }, {
@@ -188,8 +138,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var _this5 = this;
 
         this.$clearButton.on('click', function (e) {
-          count = -1;
-          nextScrollHeight = -45;
           e.preventDefault();
           var $this = $(e.currentTarget);
           $this.parent().find('.mdb-autocomplete').val('');
@@ -208,11 +156,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         if (this.$input.hasClass('mdb-autocomplete')) {
           this.$input.on('click keyup', function (e) {
             e.preventDefault();
-            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', _this6.options.closeColor);
+            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', _this6.options.xColor);
           });
           this.$input.on('blur', function (e) {
             e.preventDefault();
-            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', _this6.options.closeBlurColor);
+            $(e.target).parent().find('.mdb-autocomplete-clear').find('svg').css('fill', _this6.options.xBlurColor);
           });
         }
       }

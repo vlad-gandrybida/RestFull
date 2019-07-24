@@ -5,7 +5,7 @@
 @{
     ViewData["Title"] = Model.Restaurant.Name + " - Details Page";
 }
-<div>
+<div class="container">
     <h2>@Model.Restaurant.Name @Html.RestaurantStateBadge(Model.Restaurant.State)</h2>
     
 
@@ -13,8 +13,8 @@
     <div class="row">
         <div class="col-sm-12 col-md-3 col-lg-2">
             <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                <button asp-page="./Edit" asp-route-id="@Model.Restaurant.Id" class="btn btn-primary m-0" type="button">Edit</button>
-                <button asp-page="./Index" class="btn btn-primary m-0" type="button">Back to List</button>
+                <a asp-page="./Edit" asp-route-id="@Model.Restaurant.Id" class="btn btn-primary m-0">Edit</a>
+                <a asp-page="./Index" class="btn btn-primary m-0">Back to List</a>
             </div>
             <hr/>
         </div>
