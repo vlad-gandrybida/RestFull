@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using RestFull.Common.Enums;
 using RestFull.Common.Enums.Restaurant;
 using RestFull.Data.Entities.Restaurant;
-using RestFull.Data.SQL;
 
 namespace RestFull.Presentation.Web.Pages.Admin.Restaurants
 {

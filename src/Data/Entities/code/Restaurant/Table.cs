@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RestFull.Common.Enums;
-using RestFull.Common.Enums.Table;
+﻿using RestFull.Common.Enums.Table;
 
 namespace RestFull.Data.Entities.Restaurant
 {

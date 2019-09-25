@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RestFull.Data.Entities.Restaurant;
-
-namespace RestFull.Business.Interfaces.Services
+﻿namespace RestFull.Business.Interfaces.Services
 {
     public interface IUserService
     {

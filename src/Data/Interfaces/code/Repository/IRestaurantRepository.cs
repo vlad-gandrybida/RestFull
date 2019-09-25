@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RestFull.Data.Entities.Restaurant;
+﻿using RestFull.Data.Entities.Restaurant;
 
 namespace RestFull.Data.Interfaces.Repository
 {
