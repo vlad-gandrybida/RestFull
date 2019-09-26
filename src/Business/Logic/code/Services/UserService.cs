@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RestFull.Business.Interfaces.Services;
-using RestFull.Data.Interfaces.Repository;
+﻿using RestFull.Business.Interfaces.Services;
 using RestFull.Data.SQL.Repository;
 
 namespace RestFull.Business.Logic.Services
